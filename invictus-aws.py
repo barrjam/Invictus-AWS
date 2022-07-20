@@ -146,7 +146,7 @@ class Enumeration:
         return
 
     def enumerate_wafv2(self):
-        wafv2 = boto3.client('wafv2')
+        wafv2 = boto3.client('wafv2', )
         response = try_except(wafv2.list_web_acls, Scope='REGIONAL')
         response.pop('ResponseMetadata', None)
         wafs = response
@@ -1654,6 +1654,7 @@ class IR:
     active_services = []
 
     def __init__(self, region):
+        os.environ['AWS_DEFAULT_REGION'] = region  # This is needed for it to work from gitlab ci
         self.e = Enumeration(region)
         self.c = Configuration(region)
         self.l = Logs(region)
