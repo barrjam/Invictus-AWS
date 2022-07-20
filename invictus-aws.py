@@ -8,8 +8,16 @@ def get_random_chars(n):
 
 date = datetime.date.today().strftime("%Y-%m-%d")
 random_chars = get_random_chars(5)
-PREPARATION_BUCKET = 'invictus-aws-'+ date + '-' + random_chars
-LOGS_BUCKET = 'invictus-aws-'+ date + '-' + random_chars
+
+#  The following creates randomly name buckets - the gitlab-ci- job only has read permissions
+#  So I manually created
+# aws s3 mb s3://invictus-aws
+
+#PREPARATION_BUCKET = 'invictus-aws-'+ date + '-' + random_chars
+#LOGS_BUCKET= 'invictus-aws-'+ date + '-' + random_chars
+
+PREPARATION_BUCKET="invictus-aws"
+LOGS_BUCKET=PREPARATION_BUCKET
 
 ENUMERATION_KEY = 'enumeration/enumeration.json'
 CONFIGURATION_KEY = 'configuration/configuration.json'
